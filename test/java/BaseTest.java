@@ -12,6 +12,7 @@ import pageobject.BasePage;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Driver;
 import java.time.Duration;
 import java.util.List;
 import java.util.Properties;
@@ -42,13 +43,12 @@ public class BaseTest {
 
     }
 
-
-    @AfterEach
-    public void tearDown(){
-     if(driver != null){
-         driver.quit();
-     }
-    }
+//    @AfterEach
+//    public void tearDown(){
+//     if(driver != null){
+//         driver.quit();
+//     }
+//    }
 
     @Test
     public void verifyingForm(){
@@ -61,11 +61,24 @@ public class BaseTest {
         WebElement address = driver.findElement(basePage.addressLocator);
         address.sendKeys("Lalitpur");
 
-        List<WebElement> radioButtons = driver.findElements(basePage.genderLocator);
+//         List<WebElement> genderType = driver.findElements(basePage.genderTypeLocator);
+//         for(int i = 0; i < genderType.size(); i++){
+//             genderType.get(0).click();
+//         }
 
-        for(int i = 0; i <= radioButtons.size() - 1; i++){
-           radioButtons.get(0).click();
-        }
+
+        List<WebElement> genderType = driver.findElements(basePage.genderTypeLocator);
+        genderType.get(1).click();
+
+        List<WebElement> checkBoxes = driver.findElements(basePage.checkBoxLocator);
+        checkBoxes.get(5).click();
+
+        WebElement dropDownELement = driver.findElement(basePage.selectCountryLocator);
+        Select dropDown = new Select(dropDownELement);
+        dropDown.selectByValue("Nepal");
+
+
+
 
     }
 
